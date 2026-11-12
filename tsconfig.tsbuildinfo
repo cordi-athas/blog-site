@@ -1,1 +1,0 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/components/Calendar.tsx","./src/data/holidays.ts","./src/lib/dates.ts","./src/lib/ics.ts","./src/lib/planner.test.ts","./src/lib/planner.ts"],"version":"5.6.3"}
