@@ -1,29 +1,24 @@
 {
-  "name": "blog-site",
-  "version": "0.1.0",
+  "name": "izin-takvimi",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "dependencies": {
-    "gray-matter": "^4.0.3",
-    "next": "11.0.1",
-    "next-redux-wrapper": "^7.0.5",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-icons": "^4.2.0",
-    "react-modal": "^3.14.3",
-    "react-redux": "^7.2.5",
-    "remark": "^14.0.1",
-    "remark-html": "^14.0.1",
-    "sass": "^1.39.2"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.3.1",
-    "nodemon": "^2.0.12",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.7"
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
   }
 }
