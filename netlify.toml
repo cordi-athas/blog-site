@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # Site önceden Next.js olarak algılandı; bu proje Vite kullanıyor, Next.js eklentisini atla
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 # Hash'li dosyalar uzun süre önbellekte kalabilir
 [[headers]]
