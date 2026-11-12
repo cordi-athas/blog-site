@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# İzin Takvimi
 
-## Getting Started
+Türkiye resmi tatillerini yıllık takvimde gösteren ve **en az izinle en uzun tatili** planlamana yardım eden statik web uygulaması.
 
-First, run the development server:
+## Özellikler
+
+- **Yıllık takvim** (2025–2028): resmi tatiller, arife (yarım gün) ve hafta sonları renkli.
+- **Köprü fırsatları:** Her tatil için "X gün izin → Y gün kesintisiz tatil" seçenekleri; en verimli seçenek işaretli. Üzerine gelince takvimde önizlenir, tıklayınca planına eklenir.
+- **Akıllı plan:** Yıllık izin hakkını girersin; algoritma resmi tatilleri birleştirerek toplam kesintisiz tatili en çoklayan planı bulur (bütçeli ağırlıklı aralık seçimi, dinamik programlama).
+- **Kendi planın:** Takvimdeki iş günlerine tıklayarak izin ekle/çıkar; kullanılan/kalan izin ve oluşan tatil blokları anlık hesaplanır.
+- **Cumartesi çalışanlar** için ayar.
+- Arife günleri yarım gün izin sayılır.
+- Yıl geçişleri (ör. Aralık sonu + Yılbaşı) hesaba katılır.
+- Planı **.ics** olarak Google/Apple/Outlook takvimine aktarma.
+- Seçimler tarayıcıda (localStorage) saklanır; sunucu yok.
+
+## Geliştirme
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm install
+npm run dev      # geliştirme sunucusu
+npm test         # algoritma testleri (vitest)
+npm run build    # dist/ klasörüne statik çıktı
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Netlify'da yayınlama
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Repoda `netlify.toml` hazır (build: `npm run build`, yayın klasörü: `dist`, Node 22).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. app.netlify.com → **Add new site → Import an existing project → GitHub** → bu repoyu seç.
+2. Yayınlanacak dalı seç; build ayarları `netlify.toml`'dan otomatik okunur.
+3. **Deploy** — sonraki her push otomatik yayınlanır.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Alternatif: `npm run build` sonrası `dist/` klasörünü app.netlify.com/drop sayfasına sürükle-bırak.
 
-## Learn More
+## Veri
 
-To learn more about Next.js, take a look at the following resources:
+Tatil verileri `src/data/holidays.ts` içindedir. Dini bayramlar Diyanet İşleri Başkanlığı takvimine göredir; 2028 tarihleri **tahminidir** ve sitede bu şekilde işaretlenir. Yeni yıl eklemek için `RELIGIOUS` tablosuna bayramların ilk günlerini girmen yeterli.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Yapı
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+src/
+  data/holidays.ts      resmi tatil verisi
+  lib/planner.ts        gün modeli, fırsat bulma, gruplama, plan optimizasyonu
+  lib/planner.test.ts   testler
+  lib/dates.ts          tarih yardımcıları (TR)
+  lib/ics.ts            .ics dışa aktarma
+  components/Calendar.tsx
+  App.tsx, styles.css
+```
