@@ -23,7 +23,15 @@ npm test         # algoritma testleri (vitest)
 npm run build    # dist/ klasörüne statik çıktı
 ```
 
-`dist/` klasörü herhangi bir statik barındırmaya (GitHub Pages, Netlify, Vercel, Cloudflare Pages) doğrudan yüklenebilir.
+## Netlify'da yayınlama
+
+Repoda `netlify.toml` hazır (build: `npm run build`, yayın klasörü: `dist`, Node 22).
+
+1. app.netlify.com → **Add new site → Import an existing project → GitHub** → bu repoyu seç.
+2. Yayınlanacak dalı seç; build ayarları `netlify.toml`'dan otomatik okunur.
+3. **Deploy** — sonraki her push otomatik yayınlanır.
+
+Alternatif: `npm run build` sonrası `dist/` klasörünü app.netlify.com/drop sayfasına sürükle-bırak.
 
 ## Veri
 
